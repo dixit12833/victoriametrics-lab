@@ -10,7 +10,7 @@
 - **node_exporter** — экспорт системных метрик хоста
 
 ## 📁 Структура проекта
-
+```bash
 victoriametrics-lab/
 ├── config/ # Конфигурации vmagent и прочее
 ├── data/ # Хранилище метрик (volume)
@@ -23,7 +23,7 @@ victoriametrics-lab/
 ├── docker-compose.yml
 ├── start.ps1 # Запуск всех компонентов
 └── stop.ps1 # Остановка всех компонентов
-
+```
 ## ⚙️ Быстрый старт
 
 > ⚠️ Убедись, что у тебя установлен [Docker](https://www.docker.com/) и [Docker Compose](https://docs.docker.com/compose/)  
@@ -34,3 +34,4 @@ victoriametrics-lab/
 ```bash
 git clone https://github.com/<ваш-логин>/victoriametrics-lab.git
 cd victoriametrics-lab
+```
