@@ -1,0 +1,41 @@
+services:
+  victoriametrics:
+    image: victoriametrics/victoria-metrics:${VM_VERSION}
+    container_name: victoriametrics
+    ports:
+      - "${VM_PORT}:8428"
+    volumes:
+      - ./data/victoriametrics:/storage
+    restart: unless-stopped
+
+  vmagent:
+    image: victoriametrics/vmagent:${VMAGENT_VERSION}
+    container_name: vmagent
+    volumes:
+      - ./config/vmagent.yaml:/etc/vmagent.yaml
+    command:
+      - "-promscrape.config=/etc/vmagent.yaml"
+    restart: unless-stopped
+    depends_on:
+      - victoriametrics
+
+  grafana:
+    image: grafana/${GRAFANA_VERSION}
+    container_name: grafana
+    ports:
+      - "${GRAFANA_PORT}:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
+    volumes:
+      - ./grafana:/var/lib/grafana
+    restart: unless-stopped
+    depends_on:
+      - victoriametrics
+
+  node_exporter:
+    image: prom/node-exporter:${NODE_EXPORTER_VERSION}
+    container_name: node_exporter
+    ports:
+      - "${NODE_EXPORTER_PORT}:9100"
+    restart: unless-stopped

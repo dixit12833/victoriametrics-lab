@@ -1,0 +1,18 @@
+# VS Code
+.vscode/
+
+# Docker volumes & Grafana data
+grafana/
+data/
+logs/
+
+# PowerShell history
+*.pshistory
+
+# OS system files
+Thumbs.db
+.DS_Store
+
+# Python/Node temp (если будут скрипты)
+__pycache__/
+node_modules/
